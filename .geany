@@ -1,0 +1,12 @@
+dowload geany in the link: https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjfu4XOn8jqAhU3KLkGHf-zBcoQFjAAegQIARAC&url=https%3A%2F%2Fwww.geany.org%2F&usg=AOvVaw1ZzlF9nVrCDGIHirj_WOTc
+after that you may dowload python 3.8 version in your pc! the link: https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiI3annn8jqAhViHbkGHWTPCZQQFjAAegQIARAC&url=https%3A%2F%2Fwww.python.org%2Fdownloads%2F&usg=AOvVaw3VuYRIaaa-SL5nRa6pfny0
+in your geany you can paste this setup below
+
+1. Go in build -> set builds commands
+2. compile = C:\User\Name\Python\Python38-32
+3. lint = pep8 --max-line-length=80 "%f"
+4. error regular expression = (.+):([0-9]+):([0-9]+)
+5. contruir = make
+6. make custom target = make
+7. contruir object = make %e.o
+8. execute  = Python "%f"
