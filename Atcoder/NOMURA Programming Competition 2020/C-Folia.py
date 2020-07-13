@@ -1,7 +1,6 @@
 n = int(input())
 nums = list(map(int, input().split()))
  
-
 if n == 0:
     if nums[0] == 1:
         print(1)
@@ -11,8 +10,6 @@ if n == 0:
 if n > 0 and nums[0] >= 1:
     print(-1)
     exit()
- 
-
  
 rest = sum(nums)
  
@@ -25,7 +22,6 @@ for i in range(1, n+1):
     n_node -= nums[i]
     rest -= nums[i]
  
-
     if n_node < 0:
         print(-1)
         exit()
