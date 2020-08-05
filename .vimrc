@@ -16,7 +16,7 @@ highlight Comment ctermfg=green
 " System clipboard:
 set clipboard=unnamed
 
-" Tabs: 
+" Tabss: 
 set expandtab
 set shiftwidth=4
 set tabstop=4
