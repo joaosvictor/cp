@@ -1,3 +1,3 @@
-This repositories is focused in CP(competitive programming)
+This repositories is focused in CP(competitive programming) and Sort Algorithms like: Bubble sort, quicksort, mergesort and selection sort
 
-I throw here a bunch of solutions of some Contests(CodeForces,CodeChef,Atcoder,Google's coding Competitions & more ) and Olympiads(USACO,IOI & OBI)
+I throw here a bunch of solutions of some contests like CodeChef and AtCoder and the algorithms 
