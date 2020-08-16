@@ -12,8 +12,7 @@ ll a[200001];
 vector<int> adj[200001];
 ll x;
 void dfs(int v, int p , int dep){
-	//cout<<v<<" "<<dep<<"\n";
-	//cout<<a[v]<<"\n";
+
 	if(dep%2==1)x=x^a[v];
 //	cout<<x<<"\n";
 	for(int i=0;i<adj[v].size();i++){
