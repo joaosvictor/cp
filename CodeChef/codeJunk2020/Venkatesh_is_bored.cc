@@ -12,9 +12,9 @@ using ordered_map = tree<key, value, cmp, rb_tree_tag, tree_order_statistics_nod
 // find_by_order(k)  returns iterator to kth element starting from 0;
 // order_of_key(k) returns count of elements strictly smaller than k;
 
-struct custom_hash { // Credits: https://codeforces.com/blog/entry/62393
+struct custom_hash { 
     static uint64_t splitmix64(uint64_t x) {
-        // http://xorshift.di.unimi.it/splitmix64.c
+
         x += 0x9e3779b97f4a7c15;
         x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
         x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
@@ -109,7 +109,6 @@ inline int64_t random_long(){
 }
 
 
-/*/---------------------------Defines----------------------/*/
 typedef vector<int> vi;
 typedef pair<int,int> pii;
 
@@ -326,5 +325,5 @@ int main(){
     auto stop = std::chrono::high_resolution_clock::now(); 
     auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start); 
     
-    // cerr << "Time taken : " << ((long double)duration.count())/((long double) 1e9) <<"s "<< endl;     
+
 }
