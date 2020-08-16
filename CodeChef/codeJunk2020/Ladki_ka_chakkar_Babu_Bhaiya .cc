@@ -160,8 +160,6 @@ int main()
         ans[i]={0,0};
     bool visited[n]={0};
     DFS(tree,0,visited,ans,isprime);
-    // for(int i=0;i<n;i++)
-    //     cout<<ans[i].first<<" "<<ans[i].second<<endl;
     bool visited2[n]={0};
     ll finans[n]={0};
     DFS2(tree,0,visited2,ans,finans,isprime);
