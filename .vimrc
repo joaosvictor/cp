@@ -42,14 +42,7 @@ set incsearch
 " Clean the searched results:
 nmap <silent> <C-C> :silent noh<CR>
 
-" Fountain and window:
-set guifont=consolas:h10
-set encoding=utf-8
-set lines=36 columns=142
-set wildmenu
 
-" Save:
-nmap <silent> <C-S> :silent w<CR>
 
 
 
