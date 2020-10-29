@@ -8,7 +8,7 @@ set noswapfile
 set nowritebackup
 
 " colors and themes:
-colorscheme slate
+colorscheme angr
 filetype on
 syntax on
 highlight Comment ctermfg = green
