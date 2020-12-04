@@ -23,7 +23,6 @@ int main(){
     
 		ans = min(ans,abs(a[i+1]-a[i-1])+s[i-1]+s[n-1]-s[i+1]);
 		ans = min(ans,s[n-2]);
-		cout<<ans<<endl;	
-    
+		cout << ans <<endl;	
 	}
  } 
