@@ -1,3 +1,4 @@
+# load all the inputs from day1 to day25
 from time import time
 import os
 
