@@ -1,11 +1,5 @@
 #!/usr/bin/env python3
 from collections import *
-from functools import lru_cache
-import heapq
-import itertools
-import math
-import random
-import sys
 
 def main():
     
@@ -34,7 +28,6 @@ def main():
     print("Answer to part 2:")
     print(len(s) - 1)
 
-    @lru_cache()
     def solve(color):
 
         ans = 1
