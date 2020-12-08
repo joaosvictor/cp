@@ -25,7 +25,7 @@ def main():
             if x not in s:
                 q.append(x)
                 s.add(x)
-    print("Answer to part 2:")
+    print("Answer to part 1:")
     print(len(s) - 1)
 
     def solve(color):
@@ -37,7 +37,7 @@ def main():
         return ans
 
     print('')
-    print("Answer to part 1:")
+    print("Answer to part 2:")
     print(solve(("shiny", "gold")) - 1)
 
 if __name__ == "__main__":
