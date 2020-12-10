@@ -6,7 +6,7 @@ for z in range(100):
     n = len(tri)
     tri.append(tri[n - 1] + tri[n - 2] + tri[n - 3])
 
-with open('input_10') as f:
+with open('input.txt') as f:
     numbers = [int(x) for x in f]
 
 dev = max(numbers) + 3
@@ -17,6 +17,7 @@ numbers = sorted(numbers)
 d = np.diff(numbers)
 
 # Q1
+print("Answer to Part 1:")
 print(np.sum(d == 1) * np.sum(d == 3))
 
 # Q2
@@ -29,4 +30,6 @@ for i in d:
     else:
         c += 1
 
+print('')
+print("Answer to Part 2:")
 print(r)
