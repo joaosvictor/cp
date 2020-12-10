@@ -1,39 +1,32 @@
-#!/usr/bin/env python3 
+#!/usr/bin/env python3
+import numpy as np
 
-def main():
+tri = [1, 1, 2, 4]
+for z in range(100):
+    n = len(tri)
+    tri.append(tri[n - 1] + tri[n - 2] + tri[n - 3])
 
-    f = open('input.txt', 'r')
-    adapters = [int(line.strip()) for line in f.readlines() if line.strip()]
-    adapters.sort()
-    adapters = [0] + adapters + [adapters[-1] + 3]
-    last = 0
-    a, b = 0, 0
+with open('input_10') as f:
+    numbers = [int(x) for x in f]
 
-    for x in adapters:
-        assert x - last <= 3
-        if x - last == 1:
-            a += 1
-        elif x - last == 3:
-            b += 1
-        last = x 
-    print("Answer to part 1:")     
-    #print(a, b, a * b)
-    print(a * b) # -> 75 * 32
-            
+dev = max(numbers) + 3
+numbers.append(dev)
+numbers.append(0)
 
-    # using dynamic programming 
-    dp = [1]
-    for i in range(1, len(adapters)):
-        ans = 0
-        for j in range(i):
-            if adapters[j] + 3 >= adapters[i]:
-                ans += dp[j]
-        dp.append(ans)
+numbers = sorted(numbers)
+d = np.diff(numbers)
 
-    print('')    
-    print("Answer to part 2:") 
-    print(dp[-1])
+# Q1
+print(np.sum(d == 1) * np.sum(d == 3))
 
-if __name__ == '__main__':
-    main()
+# Q2
+r = 1
+c = 0
+for i in d:
+    if i == 3:
+        r *= tri[c]
+        c = 0
+    else:
+        c += 1
 
+print(r)
