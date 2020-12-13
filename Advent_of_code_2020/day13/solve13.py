@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 from itertools import count
 from sympy.ntheory.modular import solve_congruence
 
