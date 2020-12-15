@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
 
-data = [17,1,3,16,19,0]
+input = [17,1,3,16,19,0]
 TARGET1 = 2020
 TARGET2 = 30_000_000
 
-def build_hash(data):
+def build_hash(input):
     ret = {}
-    for ix, i in enumerate(data[:-1]):
+    for ix, i in enumerate(input[:-1]):
         ret[i] = ix+1
     return ret
 
-hash = build_hash(data)
-last_spoken = data[-1]
+hash = build_hash(input)
+last_spoken = input[-1]
 
-for i in range(len(data), TARGET2):
+for i in range(len(input), TARGET2):
     if i == TARGET1:
         print("Answer to puzzle 1:")
         print(last_spoken)
