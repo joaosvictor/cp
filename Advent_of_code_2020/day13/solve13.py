@@ -1,22 +1,59 @@
 #!/usr/bin/env python3
-from itertools import count
-from sympy.ntheory.modular import solve_congruence
+
+# https://rosettacode.org/wiki/Chinese_remainder_theorem#Python_3.6
+from functools import reduce
+
+def chinese_remainder(n, a):
+    sum = 0
+    prod = reduce(lambda a, b: a*b, n)
+    for n_i, a_i in zip(n, a):
+        p = prod // n_i
+        sum += a_i * mul_inv(p, n_i) * p
+    return sum % prod
 
 
-with open('input.txt') as f:
-    ls = [line.strip() for line in f.readlines()]
 
-earliest = int(ls[0])
-bus_times = [(-i, int(x)) for i, x in enumerate(ls[1].split(',')) if x != 'x']
-i, busses = zip(*bus_times)
+def mul_inv(a, b):
+    b0 = b
+    x0, x1 = 0, 1
+    if b == 1: return 1
+    while a > 1:
+        q = a // b
+        a, b = b, a%b
+        x0, x1 = x1 - q * x0, x0
+    if x1 < 0: x1 += b0
+    return x1
 
-print('Answer to puzzle 1: ')
-print(next((time - earliest)*bus
-           for time in count(earliest) for bus in busses
-           if time % bus == 0))
+def get_wait_time(busses, ts0):
+    ts = ts0
 
-print('')
+    while True:
+        for b in busses:
+            if b == -1:
+                continue
+            if ts % b == 0:
+                return b * (ts - ts0)
 
-# learn sympy -> https://docs.sympy.org/latest/index.html
-print('Answer to puzzle 2: ')
-print(solve_congruence(*bus_times)[0])
+        ts += 1
+
+if __name__ == "__main__":
+    with open('input.txt') as f:
+        x = f.read().split('\n')
+
+    ts = int(x[0])
+    busses = [int(b) if b != 'x' else -1 for b in x[1].split(',')]
+    print('Answer to puzzle 1: ')
+    print(get_wait_time(busses, ts))
+
+
+    a = []
+    n = []
+    for i, b in enumerate(busses):
+        if b == -1:
+            continue
+        a.append(b - i)
+        n.append(b)
+
+    print('')
+    print('Answer to puzzle 2: ')
+    print(chinese_remainder(n, a))
