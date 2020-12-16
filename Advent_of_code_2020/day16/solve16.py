@@ -1,53 +1,81 @@
 #!/usr/bin/env python3
-import re
 
-reg = re.compile(r'([\w ]+): ([0-9]+)-([0-9]+) or ([0-9]+)-([0-9]+)')
-def parse_note(x):
-    a, b, c, d, e = reg.match(x).groups()
-    return (a, (int(b), int(c), int(d), int(e)))
+ranges = {}
+tickets = []
 
 with open('input.txt') as f:
-    notes, mine, nearby = f.read().strip().split('\n\n')
-    notes = dict(map(parse_note, notes.split('\n')))
-    mine = [int(x) for x in mine.split('\n')[1].split(',')]
-    nearby = list(map(lambda x: [int(y) for y in x.split(',')], nearby.split('\n')[1:]))
+    for line in f:
+        line = line.strip()
 
-valids = []
-p1 = 0
-for ticket in nearby:
-    tick_valid = True
-    for val in ticket:
-        for a, b, c, d in notes.values():
-            if (a <= val <= b or c <= val <= d):
+        if not line:
+            break
+
+        line = line.split(': ')
+        name = line[0]
+        rng = [(int(x.split('-')[0]), int(x.split('-')[1])) for x in line[1].split(' or ')]
+        ranges[name] = set(range(rng[0][0], rng[0][1]+1)) | set(range(rng[1][0], rng[1][1]+1))
+
+    next(f)
+    # Your ticket
+    your_ticket = [int(x) for x in next(f).strip().split(',')]
+
+    next(f)
+    next(f)
+    # Nearby tickets
+    for line in f:
+        tickets.append([int(x) for x in line.strip().split(',')])
+
+valid_tickets = []
+
+solution_01 = 0
+for t in tickets:
+    valid = True
+    for v in t:
+        found = False
+
+        for r in ranges.values():
+            if v in r:
+                found = True
                 break
-        else:
-            p1 += val
-            tick_valid = False
-    if tick_valid:
-        valids.append(ticket)
-print('Answer to puzzle 1: ')
-print(p1)
 
-possibles = {rule_name: set(range(len(valids[0]))) for rule_name in notes.keys()}
-for ticket in valids:
-    for field_ix, val in enumerate(ticket):
-        for rule_name, (a, b, c, d) in notes.items():
-            if not (a <= val <= b or c <= val <= d):
-                possibles[rule_name].discard(field_ix)
+        if not found:
+            valid = False
+            solution_01 += v
 
-assignment = {}
-while len(assignment) != len(notes):
-    for rule_name, rule_set in possibles.items():
-        if len(rule_set) == 1:
-            asst = rule_set.pop()
-            assignment[rule_name] = asst
-            for other_set in possibles.values():
-                other_set.discard(asst)
+    if valid:
+        valid_tickets.append(t)
+print('Answer to puzzle 1:')
+print(solution_01)
 
-p2 = 1
-for k, v in assignment.items():
-    if k.startswith('departure'):
-        p2 *= mine[v]
+N = len(your_ticket)
+
+# Build a set of values seen for each position in the ticket
+used = [set([]) for _ in range(N)]
+for t in valid_tickets:
+    for i, v in enumerate(t):
+        used[i] |= set([v])
+
+# Figure out for which ranges we can't find any contradictions in the the ticket values
+rng = list(ranges.values())
+valid = []
+for i in range(N):
+    valid.append(set([j for j in range(N) if len(used[j] - rng[i]) == 0]))
+
+# If a certain index has only one possible value, this value can't be used in other places
+# Keep removing single values until everything has only one possiblity
+while max([len(x) for x in valid]) > 1:
+    for i, v in enumerate(valid):
+        if len(v) == 1:
+            for j in range(N):
+                if j == i:
+                    continue
+                valid[j] = valid[j] - set(v)
+
+
+# Compute solution
+solution_02 = 1
+for i in range(6):
+    solution_02 *= your_ticket[list(valid[i])[0]]
 print('')
-print('Answer to puzzle 2:')
-print(p2)
+print('Answer to puzzle 2: ')
+print(solution_02)
