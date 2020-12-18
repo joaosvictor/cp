@@ -5,8 +5,7 @@ import ast
 with open('input.txt') as f:
     ls = [line.strip() for line in f.readlines()]
 
-# https://www.geeksforgeeks.org/expression-evaluation/ and set precedence
-# of operators accordingly.
+# https://www.geeksforgeeks.org/expression-evaluation/
 def evaluate(code):
     root = ast.parse(code, mode='eval')
     for node in ast.walk(root):
