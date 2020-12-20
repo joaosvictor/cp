@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import ast
 
-
 with open('input.txt') as f:
     ls = [line.strip() for line in f.readlines()]
 
