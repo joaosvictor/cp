@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 l = input().split()
 v = int(l[0])
 t = int(l[1])
