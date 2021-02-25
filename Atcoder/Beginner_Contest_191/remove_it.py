@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 l1 = input().split()
 l2 = input().split()
  
